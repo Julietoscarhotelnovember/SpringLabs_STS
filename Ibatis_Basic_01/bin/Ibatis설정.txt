@@ -1,0 +1,9 @@
+* ORM Framework (JPA , Hibernate , Mybatis)
+* ibatis(구버전)  -> Mybatis(신버전)
+  (유지보수)          실프로젝트
+
+* 1. jar 파일 다운로드(ibatis.jar)
+  2. ojdbc6.jar
+  3. 맵 구성 정보 설정(연결 , mapper) > SqlMapConfig.xml
+  4. 실 sql 문장을 가지고 있는 mapper 파일 생성(member.xml , board.xml)
+    

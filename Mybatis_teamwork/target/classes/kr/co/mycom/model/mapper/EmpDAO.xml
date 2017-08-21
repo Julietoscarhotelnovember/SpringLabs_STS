@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="kr.co.mycom.model.EmpDAO"><!-- 인터페이스랑 똑같이 -->
+	<!-- insertBoard(글 입력하기) -->
+	<insert id="insertEmp" parameterType="kr.co.mycom.model.EmpDTO">
+		insert into emp
+		values(
+			#{empno},
+			#{ename},
+			#{job},
+			#{mgr},
+			sysdate,
+			#{sal},
+			#{comm},
+			#{deptno}
+		)
+	</insert>
+	
+	<!-- updateBoard(글수정하기) -->
+	<update id="updateEmp" parameterType="kr.co.mycom.model.EmpDTO">
+		update emp set ename=#{ename}, job=#{job}, mgr=${mgr},
+		sal=${sal}, comm=${comm}, deptno=${deptno}
+		where empno=#{empno}
+	</update>
+	
+	<!-- deleteBoard(글삭제하기) -->
+	<delete id="deleteEmp" parameterType="kr.co.mycom.model.EmpDTO">
+		delete from emp where empno=#{empno}
+	</delete>
+	
+	<!-- getBoardList(전체조회) -->
+	<select id="getEmpList" parameterType="hashmap"
+		resultType="kr.co.mycom.model.EmpDTO">
+		select * from emp
+	</select>
+	
+	<!-- getBoard (글상세보기) -->
+	<select id="getEmp" parameterType="Integer" resultType="kr.co.mycom.model.EmpDTO">
+		select * from emp where empno=#{empno}
+	</select>
+	
+	<!-- getBoardList(검색조회) -->
+	<select id="getSearchList" parameterType="hashmap"
+		resultType="kr.co.mycom.model.EmpDTO">
+		select * from emp
+		<choose>
+			<when test="select == 'empno'">
+				where empno like '%' || #{searchbox} || '%'
+			</when>
+			<when test="select == 'ename'">
+				where ename like '%' || #{searchbox} || '%'
+			</when>
+			<when test="select == 'job'">
+				where job like '%' || #{searchbox} || '%'
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+  		
+	<!-- <![CDATA[varchar2(20)]]> -->
+</mapper>

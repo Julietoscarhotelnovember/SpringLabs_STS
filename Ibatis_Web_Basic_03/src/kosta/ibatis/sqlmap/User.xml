@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<!-- 가명칭 부여해서 > user 이름 사용  -->
+	<typeAlias alias="user" type="kosta.ibatis.dto.UserDto"/>
+	
+	<!--1. 회원테이블 전체 조회 (Multi Row > APP > List<users> =...) 
+		2. client.queryForList("selectAllUsers")
+	-->
+	<select id="selectAllUsers" resultClass="user">
+		select userid,username,userpwd,usercmt
+		from users
+		order by userid
+	</select>
+	
+	<!-- 2. 회원상세조회 (Single row) , parameter id값 
+	     TIP) parameterClass="java.lang.String" 
+	          select(String id) ... 
+	             생략가능하다 ( parameterClass )
+	          default : parameter 하나는 값을 가지고 온다   
+	
+	-->
+	<select id="selectAllByUserid"   resultClass="user" >
+		select userid, username, userpwd, usercmt
+		from users 
+		where userid=#userid#
+	</select>
+	
+	
+	<!-- 회원등록 -->
+	<insert id="insertuser" parameterClass="user">
+		insert into users(userid, username,userpwd,usercmt)
+		values(#userid#, #username#,#userpwd#,#usercmt#)
+	</insert>
+	<!-- 회원수정 -->
+	<update id="updateuser" parameterClass="user">
+		update users
+		set username=#username# ,
+		    userpwd=#userpwd#
+		where userid=#userid#
+	</update>
+	<!-- 회원삭제 
+	  parameter 한개 생략가능
+	-->
+	<delete id="deleteuser">
+		delete from users
+		where userid=#userid#
+	</delete>
+	
+	
+	<!--  
+		create table T(
+			id number primary key,
+			name varchar2(20)
+		)
+	    1.id 를 sequence  객체 사용하는 경우
+	    create sequence se_num;
+	    
+	    insert into T(id,name)
+	    values(se_num.NEXTVAL,'홍길동');
+	    
+	    ibatis PK 처리 방법
+	    
+	-->
+	<!-- <insert id="insert_T_pk" parameterClass="dto.Tdto">
+				<selectKey resultClass="int" keyProperty="num">
+					select se_num.NEXTVAL from dual
+				</selectKey>
+			insert into T(id,name) values(#num#,#name#)
+	     </insert>
+	
+		<insert id="insert_T_pk2" parameterClass="dto.Tdto">
+			<selectKey resultClass="int" keyProperty="num">
+				select NVL(max(id),0) + 1 from T
+			</selectKey>
+				insert into T(id,name) values(#num#,#name#)
+		</insert> 
+	-->
+	
+	
+</sqlMap>

@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="http://www.w3schools.com/lib/w3data.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#submit").click(function(){
+			alert("회원가입 완료");
+		});
+	});
+	
+
+
+</script>
+</head>
+<body>
+	
+	<div w3-include-html="sidebar/header.jsp"></div>
+	
+
+	<div class="col-sm-3"></div>
+
+	<div class="col-sm-6">
+		<h2>RegForm</h2>
+		<br>
+		<br>
+		<form name="regform" action="mes.htm" method="post"
+			class="form-horizontal">
+
+			<div class="form-group">
+				<div>
+					<label>ID</label> <input type="text" name="id" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<div>
+					<label>PW</label> <input type="password" name="pw"
+						class="form-control">
+				</div>
+			</div>
+
+			<div class="form-group" class="col-sm-6">
+				<div>
+					<label>NAME</label> <input type="text" name="name"
+						class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<div>
+					<label>E-Mail</label> <input type="text" name="email"
+						class="form-control">
+				</div>
+			</div>
+			<input type="hidden" name="message" value="$screen_content">
+	</div>
+	<div class="row">
+		<div>
+			<div class="col-sm-12" style="text-align: center">
+				<input type="submit" id="submit" class="btn btn-default" value="등록" />
+				<a href="javascript:history.go(-1)" class="btn btn-default">목록</a>
+			</div>
+		</div>
+	</div>
+	</form>
+
+	<script>
+
+	w3IncludeHTML();
+	</script>
+
+</body>
+</html>

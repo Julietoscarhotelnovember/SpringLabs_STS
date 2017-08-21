@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<!-- 객체단위로 input , output 사용  -->
+	<!-- insert  -->
+	<insert id="insertEmp" parameterClass="Ibatis.DTO.Emp">
+		insert into emp(empno,ename,job,sal) values(#empno#,#ename#,#job#,#sal#)
+	</insert>
+	
+	<!--  
+	    //int 의 래퍼클래스 
+		//java.lang.Integer
+	
+	-->
+	<select id="selectEmp" parameterClass="java.lang.String" resultClass="Ibatis.DTO.Emp">
+		select empno , ename, job , sal from emp where ename=#ename#
+	</select>
+</sqlMap>
